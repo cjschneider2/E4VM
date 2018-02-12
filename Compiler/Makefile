@@ -1,22 +1,23 @@
-TESTFILE=gb_trees
-TESTFILE2=test1
-TESTFILE3=mochijson
-TESTFILE4=mochijson2
+STACKOPT=--profile
+RUNOPT=+RTS -xc
 
-.PHONY: run1 run2 run3 run4
-run1:
-	rebar3 compile && ./uerlc.sh priv/$(TESTFILE).erl
-run2:
-	rebar3 compile && ./uerlc.sh priv/$(TESTFILE2).erl
-run3:
-	rebar3 compile && ./uerlc.sh priv/$(TESTFILE3).erl
-run4:
-	rebar3 compile && ./uerlc.sh priv/$(TESTFILE4).erl
+.PHONY: compile
+compile:
+	stack build $(STACKOPT)
 
-.PHONY: dialyze
-dialyze:
-	rebar3 dialyzer
+TESTDATA=testData/
 
-.PHONY: test
-test:
-	rebar3 ct
+INP1=$(TESTDATA)/gb_trees.S
+INP2=$(TESTDATA)/mochijson.S
+INP3=$(TESTDATA)/mochijson2.S
+
+%.S: %.erl
+	erlc -S -o $(@D) $^
+
+.PHONY: run1 run2 run3
+run1: compile $(INP1)
+	stack exec -- uerlc-exe $(INP1) $(RUNOPT) 2>&1 | less -r
+run2: compile $(INP2)
+	stack exec -- uerlc-exe $(INP2) $(RUNOPT) 2>&1 | less -r
+run3: compile $(INP3)
+	stack exec -- uerlc-exe $(INP3) $(RUNOPT) 2>&1 | less -r

@@ -1,0 +1,27 @@
+# Temporary files used for whatever reasons
+*.txt
+e4c_pass*.txt
+j1c_pass*.txt
+
+# Erlang temporary and build output
+.rebar3
+_*
+.eunit
+*.o
+*.beam
+*.plt
+*.swp
+*.swo
+.erlang.cookie
+ebin
+log
+erl_crash.dump
+.rebar
+logs
+_build
+.idea
+
+# Rebar and IntelliJ Output directories
+deps/*
+out/*
+classes/*

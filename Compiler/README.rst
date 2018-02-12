@@ -1,19 +1,20 @@
-MicroErlang Transpiler
-======================
+Compiler
+========
 
-A simple transpiler, which picks up output from one late BEAM compiler stage
-(namely: the BEAM assembly output).
-It is then converted into simplified bytecode for the MicroErlang
-virtual machine.
-The code is compressed with a mix of Huffman codes and bit field magic
-and is designed to be executed without decompression.
+Cross-compiler tool which takes .S beam assembly files and writes out
+compressed binary MicroErlang modules.
 
-Trying it out
--------------
+Compiling
+---------
 
-    $ make run1
-    $ make run2
-    $ make run3
+*   ``sudo apt install ghc haskell-stack``
+*   ``make compile`` or ``make run``
 
-This will compile included example modules from the `priv/` dir producing
-`*.uerl` output files.
+For comfortable editing:
+
+*   IntelliJ IDEA + IntelliJ-Haskell plugin and configure path to stack in
+    the IDEA SDK options
+*   ``stack install hindent`` and ``stack install stylish-haskell`` and
+    configure them in IDEA Options
+
+With these features configured, IDEA becomes quite Haskell-friendly.
